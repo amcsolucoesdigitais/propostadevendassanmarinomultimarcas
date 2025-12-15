@@ -248,7 +248,9 @@
 
         <div class="dropdown" id="ddVendedores" role="listbox" aria-multiselectable="false">
           <div class="opt" data-name="Matheus Fontoura" data-tel="51-994376898">Matheus Fontoura</div>
+          <div class="opt" data-name="Leonardo Lourenço" data-tel="51-981622298">Leonardo Lourenço</div>
           <div class="opt" data-name="Luan Siqueira" data-tel="51-991971034">Luan Siqueira</div>
+
         </div>
       </div>
 
@@ -290,7 +292,7 @@
 
     <!-- FOTO -->
     <div class="foto-veiculo-wrapper">
-      <div class="foto-veiculo-label">Foto do veículo</div>
+      <div class="foto-veiculo-label"></div>
       <div class="foto-veiculo-box" id="carBox">
         <img id="carPreview" src="" alt="Foto do veículo" />
         <div class="foto-hint" id="carHint">Clique ou arraste a foto aqui</div>
@@ -505,6 +507,35 @@
     pdf.save(makeFilename());  // ↓↓↓ salva automaticamente com o padrão pedido
   }
 </script>
+
+<script>
+  /* ===== Datas automáticas da proposta ===== */
+
+  function formatarData(date){
+    const dia  = String(date.getDate()).padStart(2,'0');
+    const mes  = String(date.getMonth() + 1).padStart(2,'0');
+    const ano  = date.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+  }
+
+  function inicializarDatasProposta(){
+    const hoje = new Date();
+    const validade = new Date();
+    validade.setDate(hoje.getDate() + 2); // validade em 2 dias
+
+    const campoData = document.getElementById('dataProposta');
+    const campoValidade = document.getElementById('validadeProposta');
+
+    if(campoData && campoValidade){
+      campoData.textContent = formatarData(hoje);
+      campoValidade.textContent = formatarData(validade);
+    }
+  }
+
+  // Executa automaticamente ao carregar a página
+  inicializarDatasProposta();
+</script>
+
 
 </body>
 </html>
